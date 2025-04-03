@@ -6,7 +6,10 @@ spring:
     aws:
       access-key: ${AWS_ACCESS_KEY}
       secret-key: ${AWS_SECRET_KEY}
+      session-token: ${AWS_SESSION_TOKEN}
       region: us-east-1
 
       dynamodb:
-        table-name: "tb_videomanagement"
+        table-name: ${DYNABLE_TABLE_NAME}
+      sqs:
+        queue-url: ${SQS_QUEUE_URL}

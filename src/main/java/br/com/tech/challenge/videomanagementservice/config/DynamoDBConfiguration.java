@@ -17,15 +17,16 @@ public class DynamoDBConfiguration {
 
     private final AwsProperties awsProperties;
 
-//    @Bean
-//    public DynamoDbClient dynamoDbClient() {
-//        return DynamoDbClient.builder()
-//                .region(Region.of(awsProperties.getRegion()))
-//                .credentialsProvider(StaticCredentialsProvider.create(
-//                        AwsBasicCredentials.create(awsProperties.getAccessKey(), awsProperties.getSecretKey())
-//                ))
-//                .build();
-//    }
+    @Bean
+    @Profile("!local")
+    public DynamoDbClient dynamoDbClient() {
+        return DynamoDbClient.builder()
+                .region(Region.of(awsProperties.getRegion()))
+                .credentialsProvider(StaticCredentialsProvider.create(
+                        AwsBasicCredentials.create(awsProperties.getAccessKey(), awsProperties.getSecretKey())
+                ))
+                .build();
+    }
 
     @Bean
     @Profile("local")

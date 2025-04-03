@@ -10,5 +10,6 @@ import org.springframework.context.annotation.Configuration;
 public class AwsProperties {
     private String accessKey;
     private String secretKey;
+    private String sessionToken;
     private String region;
 }

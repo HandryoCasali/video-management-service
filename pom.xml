@@ -29,7 +29,7 @@
 	<properties>
 		<java.version>21</java.version>
 		<spring-cloud-aws.version>3.1.0</spring-cloud-aws.version>
-		<aws-sdk.version>2.20.0</aws-sdk.version>
+		<aws.sdk.version>2.21.12</aws.sdk.version>
 	</properties>
 
 	<dependencies>
@@ -42,10 +42,17 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-		<!-- Spring Cloud AWS para DynamoDB -->
+		<!-- DynamoDB -->
 		<dependency>
 			<groupId>io.awspring.cloud</groupId>
 			<artifactId>spring-cloud-aws-starter-dynamodb</artifactId>
+		</dependency>
+
+		<!-- SQS -->
+		<dependency>
+			<groupId>software.amazon.awssdk</groupId>
+			<artifactId>sqs</artifactId>
+			<version>${aws.sdk.version}</version>
 		</dependency>
 
 		<dependency>
@@ -66,6 +73,13 @@
 				<groupId>io.awspring.cloud</groupId>
 				<artifactId>spring-cloud-aws-dependencies</artifactId>
 				<version>${spring-cloud-aws.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>software.amazon.awssdk</groupId>
+				<artifactId>bom</artifactId>
+				<version>${aws.sdk.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>

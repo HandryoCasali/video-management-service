@@ -1,5 +1,6 @@
 package br.com.tech.challenge.videomanagementservice.usecase;
 
+import br.com.tech.challenge.videomanagementservice.dataprovider.SqsPublisherService;
 import br.com.tech.challenge.videomanagementservice.dataprovider.VideoRepository;
 import br.com.tech.challenge.videomanagementservice.domain.Video;
 import br.com.tech.challenge.videomanagementservice.domain.VideoStatus;
@@ -13,6 +14,7 @@ import java.util.List;
 @Service
 public class VideoService {
     private final VideoRepository repository;
+    private final SqsPublisherService sqsPublisherService;
 
     public void save(String usuarioId, String videoId){
         var optVideo = repository.findByUsuarioIdAndVideoId(usuarioId, videoId);
@@ -23,7 +25,7 @@ public class VideoService {
         video.setVideoId(videoId);
         video.setCreatedAt(LocalDateTime.now());
         video.setStatus(VideoStatus.RECEBIDO);
-        repository.save(video);
+        saveAndNotification(video);
     }
 
     public void update(String usuarioId, String videoId, String status){
@@ -31,7 +33,7 @@ public class VideoService {
                 new RuntimeException("Video de id: "+videoId+" não encontrado"));
         video.setStatus(VideoStatus.valueOf(status));
         video.setUpdatedAt(LocalDateTime.now());
-        repository.save(video);
+        saveAndNotification(video);
     }
 
     public List<Video> findAllByUsuarioId(String usuarioId){
@@ -42,5 +44,16 @@ public class VideoService {
         return repository.findByUsuarioIdAndVideoId(usuarioId, videoId).orElseThrow(
                         ()-> new RuntimeException("Video de id: "+videoId+ " não encontrado")
                 );
+    }
+
+    private void saveAndNotification(Video video){
+        try {
+            repository.save(video);
+            sqsPublisherService.sendMessage(video.toString());
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+            repository.deleteVideo(video);
+            throw new RuntimeException(e);
+        }
     }
 }
