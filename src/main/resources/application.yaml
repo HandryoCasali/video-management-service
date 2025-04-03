@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: videomanagementservice
+
+  cloud:
+    aws:
+      access-key: ${AWS_ACCESS_KEY}
+      secret-key: ${AWS_SECRET_KEY}
+      region: us-east-1
+
+      dynamodb:
+        table-name: "tb_videomanagement"
