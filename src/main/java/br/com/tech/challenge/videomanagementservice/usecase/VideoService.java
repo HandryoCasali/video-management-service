@@ -4,6 +4,8 @@ import br.com.tech.challenge.videomanagementservice.dataprovider.SqsPublisherSer
 import br.com.tech.challenge.videomanagementservice.dataprovider.VideoRepository;
 import br.com.tech.challenge.videomanagementservice.domain.Video;
 import br.com.tech.challenge.videomanagementservice.domain.VideoStatus;
+import br.com.tech.challenge.videomanagementservice.dto.CreateVideoDto;
+import br.com.tech.challenge.videomanagementservice.mapper.VideoMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,15 +18,13 @@ public class VideoService {
     private final VideoRepository repository;
     private final SqsPublisherService sqsPublisherService;
 
-    public void save(String usuarioId, String videoId){
-        var optVideo = repository.findByUsuarioIdAndVideoId(usuarioId, videoId);
-        optVideo.ifPresent(
-                (c)-> {throw new RuntimeException("Video de id: "+videoId+" já adicionado");});
-        var video = new Video();
-        video.setUsuarioId(usuarioId);
-        video.setVideoId(videoId);
-        video.setCreatedAt(LocalDateTime.now());
-        video.setStatus(VideoStatus.RECEBIDO);
+    public void create(CreateVideoDto createVideoDto){
+        repository.findByUsuarioIdAndVideoId(createVideoDto.usuarioId(), createVideoDto.videoId())
+                .ifPresent(c->{
+                             throw new RuntimeException("Video de id: "+createVideoDto.videoId()+" já adicionado");
+                });
+
+        var video = VideoMapper.dtoToDomain(createVideoDto);
         saveAndNotification(video);
     }
 
@@ -49,11 +49,14 @@ public class VideoService {
     private void saveAndNotification(Video video){
         try {
             repository.save(video);
-            sqsPublisherService.sendMessage(video.toString());
+            sqsPublisherService.sendMessage(VideoMapper.domainToJson(video));
+            //todo: publicar na fila que o process irá consumir
         } catch (Exception e){
             System.out.println(e.getMessage());
             repository.deleteVideo(video);
             throw new RuntimeException(e);
         }
     }
+
+
 }

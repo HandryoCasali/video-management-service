@@ -4,5 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 
 public record CreateVideoDto(
         @NotBlank String usuarioId,
-        @NotBlank String videoId
+        @NotBlank String videoId,
+        @NotBlank String videoFileName,
+        @NotBlank String videoUrl
 ){ }

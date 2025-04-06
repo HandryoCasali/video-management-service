@@ -21,7 +21,7 @@ public class VideoController {
 
     @PostMapping
     public ResponseEntity<Void> add(@RequestBody @Valid CreateVideoDto dto){
-        videoService.save(dto.usuarioId(), dto.usuarioId());
+        videoService.create(dto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

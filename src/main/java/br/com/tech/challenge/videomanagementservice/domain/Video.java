@@ -18,6 +18,8 @@ public class Video {
 
     private String usuarioId;
     private String videoId;
+    private String videoFileName;
+    private String videoUrl;
     private VideoStatus status;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

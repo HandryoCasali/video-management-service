@@ -12,11 +12,10 @@ public class SqsPublisherService {
 
     private final SqsClient sqsClient;
 
-    @Value("${spring.cloud.aws.sqs.queue-url}")
+    @Value("${sqs.queue-url}")
     private String queueUrl;
 
     public void sendMessage(String message) {
-        System.out.println(queueUrl);
         SendMessageRequest sendMessageRequest = SendMessageRequest.builder()
                 .queueUrl(queueUrl)
                 .messageBody(message)

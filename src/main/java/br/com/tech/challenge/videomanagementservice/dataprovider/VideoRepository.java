@@ -16,7 +16,7 @@ import java.util.Optional;
 @Repository
 public class VideoRepository {
     private final DynamoDbTable<Video> videoTable;
-    public VideoRepository(DynamoDbEnhancedClient enhancedClient, @Value("${spring.cloud.aws.dynamodb.table-name}") String tableName) {
+    public VideoRepository(DynamoDbEnhancedClient enhancedClient, @Value("${dynamodb.table-name}") String tableName) {
         this.videoTable = enhancedClient.table(tableName, TableSchema.fromBean(Video.class));
     }
 
