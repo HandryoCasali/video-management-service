@@ -10,6 +10,16 @@ spring:
       region: us-east-1
 
 dynamodb:
-  table-name: ${DYNABLE_TABLE_NAME}
+  table-name: ${DYNAMO_TABLE_NAME}
 sqs:
   queue-url: ${SQS_QUEUE_URL}
+
+management:
+  endpoints:
+    web:
+      base-path: /
+      exposure:
+        include: health
+server:
+  servlet:
+    context-path: /video-management

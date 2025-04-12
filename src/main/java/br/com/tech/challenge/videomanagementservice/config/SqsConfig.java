@@ -16,21 +16,6 @@ public class SqsConfig {
     private final AwsProperties awsProperties;
 
     @Bean
-    @Profile("!local")
-    public SqsClient sqsClient() {
-        return SqsClient.builder()
-                .region(Region.of(awsProperties.getRegion()))
-                .credentialsProvider(StaticCredentialsProvider.create(
-                        AwsBasicCredentials.create(
-                                awsProperties.getAccessKey(),
-                                awsProperties.getSecretKey()
-                        )
-                ))
-                .build();
-    }
-
-    @Bean
-    @Profile("local")
     public SqsClient sqsClientLocal() {
         return SqsClient.builder()
                 .region(Region.of(awsProperties.getRegion()))

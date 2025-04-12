@@ -24,7 +24,7 @@ public class Video {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    @DynamoDbPartitionKey()
+    @DynamoDbPartitionKey
     @DynamoDbAttribute("usuario_id")
     public String getUsuarioId(){
         return usuarioId;
