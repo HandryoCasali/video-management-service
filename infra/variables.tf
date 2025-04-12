@@ -13,3 +13,4 @@ variable "dynamo_table" {}
 variable "video_uploaded_queue_name" {}
 variable "notification_queue_name" {}
 variable "labsrole_arn" {}
+variable "video_cluster_name" {}

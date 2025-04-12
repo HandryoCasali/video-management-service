@@ -6,7 +6,7 @@ resource "aws_lb_target_group" "video_mgmt_tg" {
   vpc_id   = var.vpc_id
   target_type = "ip"
   health_check {
-    path = "/health"
+    path = "/video-management/health"
   }
 }
 

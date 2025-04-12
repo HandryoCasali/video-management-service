@@ -49,13 +49,9 @@ resource "aws_ecs_task_definition" "video_mgmt_task" {
   }
 }
 
-resource "aws_ecs_cluster" "video_cluster" {
-  name = "video-cluster"
-}
-
 resource "aws_ecs_service" "video_mgmt_service" {
   name            = "video-management"
-  cluster         = aws_ecs_cluster.video_cluster.id
+  cluster         = data.aws_ecs_cluster.video_cluster.id
   task_definition = aws_ecs_task_definition.video_mgmt_task.arn
   launch_type     = "FARGATE"
   desired_count   = 1

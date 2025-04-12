@@ -1,7 +1,7 @@
 resource "aws_appautoscaling_target" "ecs_scaling_target" {
   max_capacity       = 5
   min_capacity       = 1
-  resource_id        = "service/${aws_ecs_cluster.video_cluster.name}/${aws_ecs_service.video_mgmt_service.name}"
+  resource_id        = "service/${var.video_cluster_name}/${aws_ecs_service.video_mgmt_service.name}"
   scalable_dimension = "ecs:service:DesiredCount"
   service_namespace  = "ecs"
 }
