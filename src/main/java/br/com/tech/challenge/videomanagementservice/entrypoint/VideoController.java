@@ -38,12 +38,10 @@ public class VideoController {
         return ResponseEntity.ok(video);
     }
 
-    @PutMapping("/{videoId}")
-    public ResponseEntity<Void> update(@PathVariable @NotBlank String videoId,
-                                       @RequestHeader @NotBlank String usuarioId,
-                                       @RequestBody @Valid UpdateVideoDto dto) throws JsonProcessingException {
-
-        videoService.update(usuarioId, videoId, dto.status());
+    @PutMapping
+    public ResponseEntity<Void> update(
+            @RequestBody @Valid UpdateVideoDto dto) throws JsonProcessingException {
+        videoService.update(dto.userId(), dto.videoId(), dto.zipPath());
         return ResponseEntity.accepted().build();
     }
 }

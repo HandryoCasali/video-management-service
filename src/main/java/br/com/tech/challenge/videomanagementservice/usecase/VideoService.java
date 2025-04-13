@@ -10,6 +10,7 @@ import br.com.tech.challenge.videomanagementservice.mapper.VideoMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -31,11 +32,14 @@ public class VideoService {
         save(video);
     }
 
-    public void update(String usuarioId, String videoId, String status) throws JsonProcessingException {
+    public void update(String usuarioId, String videoId, String zipPath) throws JsonProcessingException {
         var video =  repository.findByUsuarioIdAndVideoId(usuarioId, videoId).orElseThrow(()->
                 new RuntimeException("Video de id: "+videoId+" não encontrado"));
-        video.setStatus(VideoStatus.valueOf(status));
+
+        VideoStatus status = StringUtils.hasText(zipPath)? VideoStatus.CONCLUIDO : VideoStatus.ERRO;
+        video.setStatus(status);
         video.setUpdatedAt(LocalDateTime.now());
+
         repository.save(video);
         notificationGateway.notification(video);
     }

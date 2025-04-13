@@ -1,6 +1,7 @@
 package br.com.tech.challenge.videomanagementservice.config;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -15,12 +16,13 @@ import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 @Configuration
 public class DynamoDBConfiguration {
 
-    private final AwsProperties awsProperties;
+    @Value("${aws.region}")
+    private String region;
 
     @Bean
     public DynamoDbClient dynamoDbClientLocal() {
         return DynamoDbClient.builder()
-                .region(Region.of(awsProperties.getRegion()))
+                .region(Region.of(region))
                 .credentialsProvider(DefaultCredentialsProvider.create())
                 .build();
     }
