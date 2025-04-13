@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 public record VideoDto(
         String usuarioId,
         String videoId,
+        String videoFileName,
         VideoStatus status,
         LocalDateTime createdAt,
         LocalDateTime updatedAt
@@ -16,6 +17,7 @@ public record VideoDto(
         this(
             video.getUsuarioId(),
             video.getVideoId(),
+            video.getVideoFileName(),
             video.getStatus(),
             video.getCreatedAt(),
             video.getUpdatedAt()

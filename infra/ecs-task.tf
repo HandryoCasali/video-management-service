@@ -30,8 +30,12 @@ resource "aws_ecs_task_definition" "video_mgmt_task" {
           value = var.dynamo_table
         },
         {
-          name  = "SQS_QUEUE_URL"
+          name  = "SQS_NOTIFICATION_URL"
           value = data.aws_sqs_queue.notification.url
+        },
+        {
+          name  = "SQS_VIDEO_UPLOADED_URL"
+          value = data.aws_sqs_queue.video_uploaded.url
         }
       ]
       logConfiguration = {

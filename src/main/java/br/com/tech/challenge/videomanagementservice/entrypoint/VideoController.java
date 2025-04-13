@@ -4,6 +4,7 @@ import br.com.tech.challenge.videomanagementservice.dto.CreateVideoDto;
 import br.com.tech.challenge.videomanagementservice.dto.UpdateVideoDto;
 import br.com.tech.challenge.videomanagementservice.dto.VideoDto;
 import br.com.tech.challenge.videomanagementservice.usecase.VideoService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
@@ -40,7 +41,7 @@ public class VideoController {
     @PutMapping("/{videoId}")
     public ResponseEntity<Void> update(@PathVariable @NotBlank String videoId,
                                        @RequestHeader @NotBlank String usuarioId,
-                                       @RequestBody @Valid UpdateVideoDto dto){
+                                       @RequestBody @Valid UpdateVideoDto dto) throws JsonProcessingException {
 
         videoService.update(usuarioId, videoId, dto.status());
         return ResponseEntity.accepted().build();
