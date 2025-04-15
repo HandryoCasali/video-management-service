@@ -1,0 +1,39 @@
+name: SonarQube
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    name: Build and analyze
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'    
+
+      - name: Build and analyze
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+          -Pcoverage \
+          -Dsonar.login=$SONAR_TOKEN \
+          -Dsonar.projectKey=HandryoCasali_video-management-service \
+          -Dsonar.organization=HandryoCasali \
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.sourceEncoding=UTF-8 \
+          -Dsonar.java.binaries=target/classes \
+          -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml \
+          -Dsonar.coverage.exclusions=**/infrastructure/**,**/dto/**,**/config/** \
+          -Dsonar.exclusions=**/*.json,**/*.xml \
+          -Dsonar.qualitygate.wait=true 
