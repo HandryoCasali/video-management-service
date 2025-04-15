@@ -18,6 +18,7 @@ public class VideoMapper {
             dto.videoId(),
             dto.videoFileName(),
             dto.videoUrl(),
+            null,
             VideoStatus.RECEBIDO,
             LocalDateTime.now(),
             null

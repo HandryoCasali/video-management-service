@@ -20,6 +20,7 @@ public class Video {
     private String videoId;
     private String videoFileName;
     private String videoUrl;
+    private String zipPath;
     private VideoStatus status;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

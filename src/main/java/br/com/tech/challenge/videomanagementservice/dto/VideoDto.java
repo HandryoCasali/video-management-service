@@ -9,6 +9,7 @@ public record VideoDto(
         String usuarioId,
         String videoId,
         String videoFileName,
+        String zipPath,
         VideoStatus status,
         LocalDateTime createdAt,
         LocalDateTime updatedAt
@@ -18,6 +19,7 @@ public record VideoDto(
             video.getUsuarioId(),
             video.getVideoId(),
             video.getVideoFileName(),
+            video.getZipPath(),
             video.getStatus(),
             video.getCreatedAt(),
             video.getUpdatedAt()

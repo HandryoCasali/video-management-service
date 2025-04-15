@@ -33,14 +33,19 @@ public class VideoService {
     }
 
     public void update(String usuarioId, String videoId, String zipPath) throws JsonProcessingException {
+        System.out.println("Update Usuarioid: "+usuarioId);
+        System.out.println("video Id: "+videoId);
+        System.out.println("zip Path: "+zipPath);
         var video =  repository.findByUsuarioIdAndVideoId(usuarioId, videoId).orElseThrow(()->
                 new RuntimeException("Video de id: "+videoId+" não encontrado"));
 
         VideoStatus status = StringUtils.hasText(zipPath)? VideoStatus.CONCLUIDO : VideoStatus.ERRO;
         video.setStatus(status);
+        video.setZipPath(zipPath);
         video.setUpdatedAt(LocalDateTime.now());
-
+        System.out.println("video: "+video);
         repository.save(video);
+        System.out.println("videoUpdate: "+video);
         notificationGateway.notification(video);
     }
 
