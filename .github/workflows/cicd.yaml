@@ -60,6 +60,6 @@ jobs:
       env:
         TF_VAR_image_url: ${{ env.ECR_REPO }}:${{ env.IMAGE_TAG }}
       run: |
-        terraform apply -auto-approve \
+        terraform apply /infra --auto-approve \
           -var="image_url=${TF_VAR_image_url}" \
           -var-file="envs/prod.tfvars"
