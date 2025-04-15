@@ -67,4 +67,4 @@ jobs:
       run: |
         terraform apply --auto-approve \
           -var="image_url=${TF_VAR_image_url}" \
-          -var-file="envs/prod.tfvars"
+          -var-file="terraform.tfvars"
