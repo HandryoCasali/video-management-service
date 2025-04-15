@@ -37,3 +37,4 @@ jobs:
           -Dsonar.coverage.exclusions=**/infrastructure/**,**/dto/**,**/config/** \
           -Dsonar.exclusions=**/*.json,**/*.xml \
           -Dsonar.qualitygate.wait=true 
+          
