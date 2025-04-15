@@ -7,7 +7,6 @@ on:
 env:
   AWS_REGION: us-east-1
   ECR_REPO: 010613378779.dkr.ecr.us-east-1.amazonaws.com/video-management
-  IMAGE_TAG: latest
 
 jobs:
   deploy:
@@ -45,6 +44,13 @@ jobs:
     - name: Login to Amazon ECR
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
+
+    - name: Set image tag with current date and time
+      id: image_tag
+      run: |
+        IMAGE_TAG=$(date +'%Y%m%d%H%M%S')
+        echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
+        echo "Using image tag: $IMAGE_TAG"
 
     - name: Build, tag, and push Docker image
       run: |
