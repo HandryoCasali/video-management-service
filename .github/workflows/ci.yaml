@@ -29,7 +29,7 @@ jobs:
           -Pcoverage \
           -Dsonar.login=$SONAR_TOKEN \
           -Dsonar.projectKey=HandryoCasali_video-management-service \
-          -Dsonar.organization=HandryoCasali \
+          -Dsonar.organization=handryocasali \
           -Dsonar.host.url=https://sonarcloud.io \
           -Dsonar.sourceEncoding=UTF-8 \
           -Dsonar.java.binaries=target/classes \
