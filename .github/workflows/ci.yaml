@@ -34,6 +34,6 @@ jobs:
           -Dsonar.sourceEncoding=UTF-8 \
           -Dsonar.java.binaries=target/classes \
           -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml \
-          -Dsonar.coverage.exclusions=**/infrastructure/**,**/dto/**,**/config/**, **/mapper/** \
+          -Dsonar.coverage.exclusions=**/infrastructure/**,**/dto/**,**/config/**,**/mapper/**,**/*Application.java \
           -Dsonar.exclusions=**/*.json,**/*.xml \
           -Dsonar.qualitygate.wait=true 
