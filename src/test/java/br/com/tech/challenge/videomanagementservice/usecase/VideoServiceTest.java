@@ -4,7 +4,6 @@ import br.com.tech.challenge.videomanagementservice.dataprovider.VideoRepository
 import br.com.tech.challenge.videomanagementservice.domain.Video;
 import br.com.tech.challenge.videomanagementservice.domain.VideoStatus;
 import br.com.tech.challenge.videomanagementservice.dto.CreateVideoDto;
-import br.com.tech.challenge.videomanagementservice.mapper.VideoMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -120,21 +119,21 @@ class VideoServiceTest {
     }
 
     @Test
-    void givenVideoExists_whenFindAllByUsuarioIdVideoId_thenReturnVideo() {
+    void givenVideoExists_whenFindByUsuarioIdVideoId_thenReturnVideo() {
         Video video = new Video();
         when(repository.findByUsuarioIdAndVideoId("user-1", "video-1")).thenReturn(Optional.of(video));
 
-        Video result = videoService.findAllByUsuarioIdVideoId("user-1", "video-1");
+        Video result = videoService.findByUsuarioIdVideoId("user-1", "video-1");
 
         assertEquals(video, result);
     }
 
     @Test
-    void givenVideoNotFound_whenFindAllByUsuarioIdVideoId_thenThrowException() {
+    void givenVideoNotFound_whenFindByUsuarioIdVideoId_thenThrowException() {
         when(repository.findByUsuarioIdAndVideoId("user-1", "video-1")).thenReturn(Optional.empty());
 
         assertThrows(RuntimeException.class,
-                () -> videoService.findAllByUsuarioIdVideoId("user-1", "video-1"));
+                () -> videoService.findByUsuarioIdVideoId("user-1", "video-1"));
     }
 
     @Test

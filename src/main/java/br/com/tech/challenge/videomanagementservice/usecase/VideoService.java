@@ -1,7 +1,5 @@
 package br.com.tech.challenge.videomanagementservice.usecase;
 
-import br.com.tech.challenge.videomanagementservice.dataprovider.SqsNotificationPublish;
-import br.com.tech.challenge.videomanagementservice.dataprovider.SqsVideoUploadedPublish;
 import br.com.tech.challenge.videomanagementservice.dataprovider.VideoRepository;
 import br.com.tech.challenge.videomanagementservice.domain.Video;
 import br.com.tech.challenge.videomanagementservice.domain.VideoStatus;
@@ -53,7 +51,7 @@ public class VideoService {
         return repository.findAllByUsuarioId(usuarioId);
     }
 
-    public Video findAllByUsuarioIdVideoId(String usuarioId, String videoId){
+    public Video findByUsuarioIdVideoId(String usuarioId, String videoId){
         return repository.findByUsuarioIdAndVideoId(usuarioId, videoId).orElseThrow(
                         ()-> new RuntimeException("Video de id: "+videoId+ " não encontrado")
                 );

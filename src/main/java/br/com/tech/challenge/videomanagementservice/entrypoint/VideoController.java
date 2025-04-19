@@ -21,20 +21,20 @@ public class VideoController {
     private final VideoService videoService;
 
     @PostMapping
-    public ResponseEntity<Void> add(@RequestBody @Valid CreateVideoDto dto){
+    public ResponseEntity<Void> add(@RequestBody @Valid CreateVideoDto dto) {
         videoService.create(dto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity<List<VideoDto>> getByUserId(@RequestHeader @NotBlank String usuarioId){
+    public ResponseEntity<List<VideoDto>> getByUserId(@RequestHeader @NotBlank String usuarioId) {
         var videos = videoService.findAllByUsuarioId(usuarioId).stream().map(VideoDto::new).toList();
         return ResponseEntity.ok(videos);
     }
 
     @GetMapping("/{videoId}")
-    public ResponseEntity<VideoDto> getById(@PathVariable @NotBlank String videoId, @NotBlank @RequestHeader String usuarioId){
-        var video = new VideoDto(videoService.findAllByUsuarioIdVideoId(usuarioId, videoId));
+    public ResponseEntity<VideoDto> getById(@PathVariable @NotBlank String videoId, @NotBlank @RequestHeader String usuarioId) {
+        var video = new VideoDto(videoService.findByUsuarioIdVideoId(usuarioId, videoId));
         return ResponseEntity.ok(video);
     }
 
