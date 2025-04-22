@@ -1,8 +1,8 @@
-alb_listener_arn             = "arn:aws:elasticloadbalancing:us-east-1:010613378779:loadbalancer/app/shared-alb/d6f5464394ebecc0"
-alb_sg_id                    = "sg-0cc8d977c6fb1913f"
-alb_dns                      = "internal-shared-alb-946186929.us-east-1.elb.amazonaws.com"
-subnet_ids                   = ["subnet-057134789571f98ba", "subnet-0a6ce4c526726b259"]
-vpc_id                       = "vpc-0fbcd731011399125"
+alb_listener_arn             = "arn:aws:elasticloadbalancing:us-east-1:561266514983:loadbalancer/app/shared-alb/2c4784301d8bbad1"
+alb_sg_id                    = "sg-0f158052653f58c64"
+alb_dns                      = "internal-shared-alb-1828749500.us-east-1.elb.amazonaws.com"
+subnet_ids                   = ["subnet-02dfefca38889217f", "subnet-064e90a098c98514f"]
+vpc_id                       = "vpc-00540ae73d895d3d3"
 region                       = "us-east-1"
 spring_profile               = "prod"
 dynamo_table                 = "videos"
