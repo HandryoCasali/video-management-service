@@ -8,7 +8,7 @@ on:
 
 env:
   AWS_REGION: us-east-1
-  ECR_REPO: 010613378779.dkr.ecr.us-east-1.amazonaws.com/video-management
+  ECR_REPO: 561266514983.dkr.ecr.us-east-1.amazonaws.com/video-management
 
 jobs:
   deploy:
